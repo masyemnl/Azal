@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AZAL Web Shop</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #fff, #fff9f0);
+      color: #333;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid #eee;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo svg { width: 48px; height: 48px; }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 6fr 6fr;
+      padding: 40px 40px;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    .hero p { color: #555; margin-bottom: 20px; }
+    .btn-primary {
+      background: #d97706;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .shop { padding: 40px; background: #fff; }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      background: #fafafa;
+    }
+    .product h3 { margin: 10px 0; }
+    .product button {
+      background: #d97706;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #cartModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 40;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .cart-content {
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      width: 90%; max-width: 500px;
+    }
+    .cart-content h2 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    td, th { padding: 8px; border-bottom: 1px solid #ddd; text-align: left; }
+    .checkout {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .checkout button {
+      background: #15803d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    footer { padding: 20px 40px; text-align: center; color: #777; border-top: 1px solid #eee; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#7C3AED" />
+            <stop offset="100%" stop-color="#F59E0B" />
+          </linearGradient>
+        </defs>
+        <rect width="120" height="120" rx="20" fill="url(#g1)" />
+        <g transform="translate(18,18) scale(0.8)" fill="#fff">
+          <path d="M36.5 10C24 10 14 20 14 32.5S36.5 66 36.5 66 59 55 59 42.5 49 10 36.5 10z" opacity="0.95" />
+          <path d="M46 18c-4 6-12 10-12 10s6 4 10 10c6-4 12-10 12-10s-6-6-10-10z" opacity="0.5" />
+        </g>
+        <text x="60" y="95" text-anchor="middle" font-family="Inter, system-ui, Arial" font-weight="700" font-size="20" fill="#fff">AZAL</text>
+      </svg>
+      <h2>AZAL Web Shop</h2>
+    </div>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Discover Specialty Coffee & Tea</h1>
+      <p>Sustainably sourced, freshly roasted — delivered to your door.</p>
+      <button class="btn-primary" onclick="scrollToShop()">Shop Now</button>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800" alt="Coffee" style="width:100%; border-radius:12px;" />
+    </div>
+  </section>
+
+  <section class="shop" id="shop">
+    <h2>Featured Products</h2>
+    <div class="products">
+      <div class="product">
+        <h3>Ethiopian Single Origin</h3>
+        <p>Floral, citrus notes. 250g</p>
+        <p><strong>€9.50</strong></p>
+        <button onclick="addToCart('Ethiopian Single Origin', 9.5)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Colombian Medium Roast</h3>
+        <p>Chocolatey body, caramel sweetness. 250g</p>
+        <p><strong>€8.00</strong></p>
+        <button onclick="addToCart('Colombian Medium Roast', 8.0)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <h3>Premium Black Tea</h3>
+        <p>Full-bodied Assam tea. 100g</p>
+        <p><strong>€6.00</strong></p>
+        <button onclick="addToCart('Premium Black Tea', 6.0)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="padding:40px; background:#fff9e6;">
+    <h2>About AZAL</h2>
+    <p>AZAL is devoted to exceptional coffee and tea. We work directly with farmers for fair prices and better taste.</p>
+  </section>
+
+  <section id="contact" style="padding:40px;">
+    <h2>Contact</h2>
+    <p>Email us: <a href="mailto:info@azal.example">info@azal.example</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 AZAL Web Shop — Made with ❤️</p>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div id="cartModal">
+    <div class="cart-content">
+      <h2>Your Cart</h2>
+      <table id="cartTable">
+        <thead>
+          <tr><th>Item</th><th>Qty</th><th>Price</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="checkout">
+        <strong>Total: €<span id="totalPrice">0.00</span></strong>
+        <button onclick="checkout()">Checkout</button>
+      </div>
+      <p style="text-align:center; margin-top:10px;"><button onclick="closeCart()">Close</button></p>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const item = cart.find(i => i.name === name);
+      if (item) {
+        item.qty++;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
+      const tbody = document.querySelector('#cartTable tbody');
+      tbody.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${item.name}</td><td>${item.qty}</td><td>€${(item.price * item.qty).toFixed(2)}</td><td><button onclick="removeFromCart(${index})">x</button></td>`;
+        tbody.appendChild(row);
+      });
+      document.getElementById('totalPrice').textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function openCart() {
+      document.getElementById('cartModal').style.display = 'flex';
+    }
+
+    function closeCart() {
+      document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      let summary = 'Order Summary:\n';
+      cart.forEach(item => {
+        summary += `${item.qty} x ${item.name} - €${(item.price * item.qty).toFixed(2)}\n`;
+      });
+      summary += `Total: €${document.getElementById('totalPrice').textContent}`;
+      alert(summary + '\n\nThank you for your order!');
+      cart = [];
+      updateCartUI();
+      closeCart();
+    }
+
+    function scrollToShop() {
+      document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - Bonnen Coffee</title>
+  <meta property="og:title" content="Cart - Bonnen Yemeni Coffee">
+  <meta property="og:description" content="Checkout your Bonnen Yemeni Coffee selections.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="logo.svg">
+  <link rel="icon" href="1.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      background: #f8f5f2;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      color: #3e2723;
+    }
+    .cart-container {
+      max-width: 480px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(107, 62, 38, 0.13);
+      padding: 36px 28px 28px 28px;
+      text-align: center;
+    }
+    h2 {
+      color: #6b3e26;
+      margin-bottom: 24px;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    .cart-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px 0;
+    }
+    .cart-list li {
+      background: #fff7f0;
+      margin-bottom: 14px;
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 1.08rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(107,62,38,0.08);
+    }
+    .cart-summary {
+      font-size: 1.15rem;
+      color: #d74d2b;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+    .checkout-btn {
+      background: linear-gradient(90deg, #d74d2b 0%, #6b3e26 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(107,62,38,0.10);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .checkout-btn:hover {
+      background: #6b3e26;
+      transform: scale(1.06);
+    }
+    .empty-cart {
+      color: #888;
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <div class="header-row">
+        <a class="brand" href="index.html#home" aria-label="Bonnen Coffee Home">
+          <img src="logo.svg" alt="Bonnen Coffee - Yemeni Coffee logo">
+        </a>
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#about">About Bonnen</a></li>
+          <li><a href="index.html#products">Our Coffee</a></li>
+          <li><a href="index.html#story">Our Story</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="cart.html" class="active">Cart</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    <ul id="cart-list" class="cart-list"></ul>
+    <div id="cart-summary" class="cart-summary"></div>
+    <button id="checkout-btn" class="checkout-btn">Checkout</button>
+    <!-- Add this where you want the payment button to appear -->
+    <div id="paypal-button-container"></div>
+  </div>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartList = document.getElementById('cart-list');
+    const cartSummary = document.getElementById('cart-summary');
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    function updateCartDisplay() {
+      if (cart.length === 0) {
+        cartList.innerHTML = '<div class="empty-cart">Your cart is empty.</div>';
+        cartSummary.style.display = 'none';
+        checkoutBtn.style.display = 'none';
+        document.getElementById('paypal-button-container').style.display = 'none';
+      } else {
+        cartList.innerHTML = '';
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+          const li = document.createElement('li');
+          const itemTotal = item.price * item.quantity;
+          total += itemTotal;
+          
+          li.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <div>
+                <strong>${item.name}</strong>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 4px;">
+                  $${item.price.toFixed(2)} each × ${item.quantity}
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <button onclick="updateQuantity(${index}, ${item.quantity - 1})" style="background: #6b3e26; color: white; border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer;">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity(${index}, ${item.quantity + 1})" style="background: #6b3e26; color: white; border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer;">+</button>
+                <span style="font-weight: bold; margin-left: 10px;">$${itemTotal.toFixed(2)}</span>
+                <button onclick="removeItem(${index})" style="background: #dc3545; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; margin-left: 10px;">Remove</button>
+              </div>
+            </div>
+          `;
+          cartList.appendChild(li);
+        });
+        
+        cartSummary.textContent = `Total: $${total.toFixed(2)}`;
+        cartSummary.style.display = 'block';
+        checkoutBtn.style.display = 'block';
+        document.getElementById('paypal-button-container').style.display = 'block';
+        
+        // Update PayPal button with new total
+        if (window.paypal) {
+          document.getElementById('paypal-button-container').innerHTML = '';
+          paypal.Buttons({
+            createOrder: function(data, actions) {
+              return actions.order.create({
+                purchase_units: [{
+                  amount: {
+                    value: total.toFixed(2)
+                  }
+                }]
+              });
+            },
+            onApprove: function(data, actions) {
+              return actions.order.capture().then(function(details) {
+                alert('Thank you for your purchase, ' + details.payer.name.given_name + '!');
+                localStorage.removeItem('cart');
+                window.location.href = 'index.html';
+              });
+            }
+          }).render('#paypal-button-container');
+        }
+      }
+    }
+
+    function updateQuantity(index, newQuantity) {
+      if (newQuantity <= 0) {
+        removeItem(index);
+        return;
+      }
+      cart[index].quantity = newQuantity;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+
+    // Initial cart display
+    updateCartDisplay();
+
+    checkoutBtn.onclick = function() {
+      if (cart.length === 0) return;
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      alert("Thank you for your purchase!\nTotal: $" + total.toFixed(2));
+      localStorage.removeItem('cart');
+      window.location.href = 'index.html';
+    };
+
+    // Load PayPal SDK
+    if (!window.paypal) {
+      const script = document.createElement('script');
+      script.src = 'https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD';
+      script.onload = function() {
+        updateCartDisplay();
+      };
+      document.head.appendChild(script);
+    }
+  </script>
+</body>
+</html>

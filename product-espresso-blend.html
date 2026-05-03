@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonnen Espresso Blend - Premium Coffee</title>
+  <meta name="description" content="Specially crafted for espresso lovers, Bonnen Espresso Blend delivers perfect crema and balanced intensity.">
+  <meta property="og:title" content="Bonnen Espresso Blend - Yemeni Coffee">
+  <meta property="og:description" content="Premium Yemeni-inspired coffee from Bonnen. Espresso Blend.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="logo.jpg">
+  <link rel="icon" href="1.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .product-detail { max-width: 1200px; margin: 0 auto; padding: var(--spacing-xl); display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); align-items: start; }
+    .product-image { width: 100%; height: 500px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-medium); }
+    .product-info { background: var(--white); padding: var(--spacing-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-light); }
+    .product-title { font-family: var(--font-heading); font-size: 2.5rem; color: var(--primary-brown); margin-bottom: var(--spacing-md); }
+    .product-price { font-size: 2rem; font-weight: 700; color: var(--accent-gold); margin-bottom: var(--spacing-lg); }
+    .product-description { font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-bottom: var(--spacing-lg); }
+    .product-features { list-style: none; margin-bottom: var(--spacing-lg); }
+    .product-features li { padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; }
+    .product-features li:before { content: "✓"; color: var(--accent-gold); font-weight: bold; margin-right: var(--spacing-sm); }
+    .quantity-selector { display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); }
+    .quantity-input { width: 80px; padding: var(--spacing-sm); border: 2px solid var(--light-brown); border-radius: var(--radius-sm); text-align: center; font-size: 1.1rem; }
+    .add-to-cart-large { background: linear-gradient(45deg, var(--primary-brown), var(--secondary-brown)); color: var(--white); border: none; padding: var(--spacing-md) var(--spacing-xl); border-radius: var(--radius-md); font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; }
+    .add-to-cart-large:hover { background: linear-gradient(45deg, var(--secondary-brown), var(--primary-brown)); transform: translateY(-2px); box-shadow: var(--shadow-medium); }
+    .breadcrumb { margin-bottom: var(--spacing-lg); }
+    .breadcrumb a { color: var(--primary-brown); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    @media (max-width: 768px) { .product-detail { grid-template-columns: 1fr; padding: var(--spacing-lg); } .product-image { height: 300px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <div class="header-row">
+        <a class="brand" href="index.html#home" aria-label="Azal Coffee Shop Home">
+          <img src="logo.jpg" alt="Azal Coffee Shop - Yemeni Coffee logo">
+        </a>
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#about">About Bonnen</a></li>
+          <li><a href="index.html#products">Our Coffee</a></li>
+          <li><a href="index.html#story">Our Story</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> > <a href="index.html#products">Our Coffee</a> > Bonnen Espresso Blend
+    </div>
+    <div class="product-detail">
+      <img src="./es.jpg" alt="Bonnen Espresso Blend Coffee" class="product-image">
+      <div class="product-info">
+        <h1 class="product-title">Bonnen Espresso Blend</h1>
+        <div class="product-price">$25.99</div>
+        <p class="product-description">Specially crafted for espresso lovers, this blend delivers the perfect crema and balanced intensity for your morning shot or afternoon pick-me-up. Designed to perform beautifully in both traditional and modern espresso machines.</p>
+        <ul class="product-features">
+          <li>Optimized for espresso extraction</li>
+          <li>Rich crema and balanced body</li>
+          <li>Chocolate and nutty flavor notes</li>
+          <li>Versatile for milk drinks</li>
+          <li>Ethically sourced beans</li>
+          <li>Fresh roasted to order</li>
+        </ul>
+        <div class="quantity-selector">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="10">
+        </div>
+        <button class="add-to-cart-large" onclick="addToCartWithQuantity()">Add to Cart - $25.99</button>
+      </div>
+    </div>
+  </main>
+  <a id="view-cart-btn" href="cart.html" aria-label="View shopping cart">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7 7h10l-1.5 9h-7L7 7zm0 0V5a2 2 0 1 1 4 0v2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="9.5" cy="18" r="1" fill="#fff"/>
+      <circle cx="14.5" cy="18" r="1" fill="#fff"/>
+    </svg>
+  </a>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Bonnen Coffee</h3>
+        <p>Premium coffee beans sourced from the world's finest farms. Experience the perfect cup that tells a story.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <p><a href="index.html#about">About Us</a></p>
+        <p><a href="index.html#products">Our Coffee</a></p>
+        <p><a href="index.html#story">Our Story</a></p>
+        <p><a href="index.html#contact">Contact</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p>Email: hello@bonnencoffee.com</p>
+        <p>Phone: (555) 123-4567</p>
+        <p>123 Coffee Street, Bean City, BC 12345</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Bonnen Coffee. All rights reserved. | Premium Coffee Experience</p>
+    </div>
+  </footer>
+  <script>
+    function addToCartWithQuantity() {
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const productId = 'espresso-blend';
+      const productName = 'Bonnen Espresso Blend';
+      const productPrice = 25.99;
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) { existingItem.quantity += quantity; } else { cart.push({ id: productId, name: productName, price: productPrice, quantity }); }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      const n = document.createElement('div'); n.textContent = `${quantity} x ${productName} added to cart!`; n.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#6b3e26;color:#fff;padding:12px 24px;border-radius:8px;z-index:2000;box-shadow:0 4px 12px rgba(0,0,0,0.3)'; document.body.appendChild(n); setTimeout(()=>n.remove(),3000);
+      updateCartIcon();
+    }
+    function updateCartIcon(){ const c = JSON.parse(localStorage.getItem('cart'))||[]; const i=document.getElementById('view-cart-btn'); if(i){ i.style.display = c.length>0?'block':'none'; } }
+    updateCartIcon();
+  </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Marahib</title>
+    <link rel="stylesheet" href="css/marahib-styles.css">
+    <style>
+        .cart-page {
+            min-height: calc(100vh - 200px);
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .cart-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+        
+        .cart-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .cart-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .cart-header a {
+            color: var(--secondary-blue);
+            text-decoration: none;
+        }
+        
+        .cart-header a:hover {
+            text-decoration: underline;
+        }
+        
+        #emptyCart {
+            text-align: center;
+            padding: var(--spacing-xl);
+            background: var(--light-gray);
+            border-radius: var(--radius-lg);
+            display: none;
+        }
+        
+        #emptyCart h2 {
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        #emptyCart p {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .continue-shopping-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: var(--spacing-md) var(--spacing-xl);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .continue-shopping-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .cart-items-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-light);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .cart-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: var(--spacing-md);
+            align-items: center;
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--ice-blue);
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-info h4 {
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .cart-item-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            justify-content: center;
+        }
+        
+        .qty-btn {
+            background: var(--ice-blue);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .qty-btn:hover {
+            background: var(--light-blue);
+            color: var(--white);
+        }
+        
+        .cart-item-quantity span {
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .cart-item-total {
+            text-align: right;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--success-green);
+        }
+        
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: #ef4444;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .remove-btn:hover {
+            background: #fee2e2;
+        }
+        
+        .cart-summary {
+            background: var(--light-gray);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid var(--ice-blue);
+        }
+        
+        .summary-row.total {
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--success-green), #059669);
+            color: var(--white);
+            border: none;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+            background: linear-gradient(135deg, #059669, var(--success-green));
+        }
+        
+        @media (max-width: 768px) {
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-sm);
+                text-align: center;
+            }
+            
+            .cart-item-total {
+                text-align: center;
+            }
+            
+            .cart-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-nav" aria-label="Primary navigation">
+            <div class="header-row">
+                <a class="brand" href="marahib.html" style="text-decoration: none; display: flex; align-items: center; gap: var(--spacing-sm);">
+                    <svg width="48" height="48" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="120" height="120" rx="20" fill="url(#iceGradient)" />
+                        <path d="M30 40 L50 40 L50 60 L70 60 L70 80 L90 80" stroke="white" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.9"/>
+                        <circle cx="40" cy="30" r="8" fill="white" opacity="0.8"/>
+                        <circle cx="80" cy="30" r="8" fill="white" opacity="0.8"/>
+                        <text x="60" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="16" fill="white">M</text>
+                    </svg>
+                    <div class="brand-name">
+                        <span class="brand-primary">Marahib</span>
+                        <span class="brand-secondary">Premium Frozen</span>
+                    </div>
+                </a>
+                <ul>
+                    <li><a href="marahib.html">Home</a></li>
+                    <li><a href="marahib.html#products">Products</a></li>
+                    <li><a href="marahib.html#about">About</a></li>
+                    <li><a href="marahib.html#contact">Contact</a></li>
+                    <li><a href="marahib-cart.html" class="active">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cart-page">
+            <div class="cart-container">
+                <div class="cart-header">
+                    <h1>Shopping Cart</h1>
+                    <a href="marahib.html">← Continue Shopping</a>
+                </div>
+
+                <div id="emptyCart">
+                    <h2>Your cart is empty</h2>
+                    <p>Looks like you haven't added any items to your cart yet.</p>
+                    <a href="marahib.html" class="continue-shopping-btn">Start Shopping</a>
+                </div>
+
+                <div class="cart-items-container">
+                    <div id="cartItems"></div>
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>$<span id="cartSubtotal">0.00</span></span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Calculated at checkout</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>$<span id="cartTotal">0.00</span></span>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Marahib</h3>
+                <p>Premium frozen products preserved with care. Quality you can trust, freshness you can taste.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="marahib.html">Home</a></p>
+                <p><a href="marahib.html#products">Products</a></p>
+                <p><a href="marahib.html#about">About</a></p>
+                <p><a href="marahib.html#services">Services</a></p>
+                <p><a href="marahib.html#contact">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Product Categories</h3>
+                <p><a href="marahib.html#products">Frozen Meals</a></p>
+                <p><a href="marahib.html#products">Chicken</a></p>
+                <p><a href="marahib.html#products">Fish</a></p>
+                <p><a href="marahib.html#products">Vegetables</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@marahib.com</p>
+                <p>Phone: +1 (234) 567-890</p>
+                <p>123 Freezing Street<br>Cold Storage City, CS 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Marahib. All rights reserved. | Premium Frozen Products</p>
+        </div>
+    </footer>
+
+    <script src="js/marahib.js"></script>
+</body>
+</html>
+

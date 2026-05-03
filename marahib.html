@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marahib - Premium Frozen Products</title>
+    <meta name="description" content="Marahib specializes in premium frozen products including meals, chicken, fish, and vegetables. Quality preservation for products that cannot survive without freezing.">
+    <meta name="keywords" content="frozen food, frozen meals, frozen chicken, frozen fish, frozen vegetables, food preservation, Marahib">
+    <link rel="stylesheet" href="css/marahib-styles.css">
+</head>
+<body>
+    <header>
+        <nav class="main-nav" aria-label="Primary navigation">
+            <div class="header-row">
+                <div class="brand">
+                    <svg width="48" height="48" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="120" height="120" rx="20" fill="url(#iceGradient)" />
+                        <path d="M30 40 L50 40 L50 60 L70 60 L70 80 L90 80" stroke="white" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.9"/>
+                        <circle cx="40" cy="30" r="8" fill="white" opacity="0.8"/>
+                        <circle cx="80" cy="30" r="8" fill="white" opacity="0.8"/>
+                        <text x="60" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="16" fill="white">M</text>
+                    </svg>
+                    <div class="brand-name">
+                        <span class="brand-primary">Marahib</span>
+                        <span class="brand-secondary">Premium Frozen</span>
+                    </div>
+                </div>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="marahib-cart.html">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-overlay">
+                <h1>Preserving Quality Through Freezing</h1>
+                <p>Marahib specializes in premium frozen products including meals, chicken, fish, and vegetables. We ensure the highest quality preservation for products that cannot survive without freezing.</p>
+                <a href="#products" class="hero-btn">Explore Products</a>
+            </div>
+            <div class="hero-pattern"></div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Why Choose Marahib?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">❄️</div>
+                        <h3>Flash Freezing Technology</h3>
+                        <p>State-of-the-art flash freezing preserves nutrients, texture, and flavor better than traditional methods.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>Quality Guaranteed</h3>
+                        <p>Every product is carefully selected and processed to meet the highest quality standards.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h3>Fresh as the Day Frozen</h3>
+                        <p>Our freezing process locks in freshness, ensuring your products maintain their original quality.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚚</div>
+                        <h3>Fast Delivery</h3>
+                        <p>Temperature-controlled delivery ensures your frozen products arrive in perfect condition.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="products-section">
+            <div class="container">
+                <h2>Our Product Categories</h2>
+                <div class="products-grid">
+                    <article class="product-card category-card" data-category="meals">
+                        <div class="product-img-placeholder">
+                            <div class="category-icon">🍽️</div>
+                        </div>
+                        <div class="product-card-content">
+                            <h3>Frozen Meals</h3>
+                            <p>Ready-to-eat meals prepared with fresh ingredients and flash-frozen to preserve flavor and nutrition. Perfect for convenient, healthy dining.</p>
+                            <span class="category-badge">Ready Meals</span>
+                        </div>
+                        <div class="product-card-footer">
+                            <button type="button" class="view-products-btn" data-category="meals">View Meals</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card category-card" data-category="chicken">
+                        <div class="product-img-placeholder">
+                            <div class="category-icon">🍗</div>
+                        </div>
+                        <div class="product-card-content">
+                            <h3>Frozen Chicken</h3>
+                            <p>Premium quality chicken products, processed and frozen at peak freshness. Available in various cuts and preparations.</p>
+                            <span class="category-badge">Poultry</span>
+                        </div>
+                        <div class="product-card-footer">
+                            <button type="button" class="view-products-btn" data-category="chicken">View Chicken</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card category-card" data-category="fish">
+                        <div class="product-img-placeholder">
+                            <div class="category-icon">🐟</div>
+                        </div>
+                        <div class="product-card-content">
+                            <h3>Frozen Fish</h3>
+                            <p>Fresh catch flash-frozen at sea to maintain quality and freshness. Wide variety of fish and seafood products available.</p>
+                            <span class="category-badge">Seafood</span>
+                        </div>
+                        <div class="product-card-footer">
+                            <button type="button" class="view-products-btn" data-category="fish">View Fish</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card category-card" data-category="vegetables">
+                        <div class="product-img-placeholder">
+                            <div class="category-icon">🥦</div>
+                        </div>
+                        <div class="product-card-content">
+                            <h3>Frozen Vegetables</h3>
+                            <p>Farm-fresh vegetables frozen at peak ripeness to preserve nutrients and flavor. Perfect for year-round healthy eating.</p>
+                            <span class="category-badge">Produce</span>
+                        </div>
+                        <div class="product-card-footer">
+                            <button type="button" class="view-products-btn" data-category="vegetables">View Vegetables</button>
+                        </div>
+                    </article>
+                </div>
+
+                <div id="productDetails" class="product-details-section" style="display: none;">
+                    <h3 id="categoryTitle"></h3>
+                    <div id="productList" class="products-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About Marahib</h2>
+                        <p>Marahib was founded with a simple yet important mission: to preserve the quality and freshness of products that cannot survive without freezing. We understand that certain foods require immediate freezing to maintain their nutritional value, taste, and texture.</p>
+                        <p>Our state-of-the-art freezing facilities use advanced flash-freezing technology that quickly freezes products to prevent ice crystal formation, preserving cell structure and ensuring the highest quality when thawed.</p>
+                        <p>Whether you're looking for convenient frozen meals, premium chicken cuts, fresh-caught fish, or seasonal vegetables, Marahib ensures that every product maintains its quality from our facility to your table.</p>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Quality Guaranteed</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">Product Varieties</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">24/7</div>
+                                <div class="stat-label">Cold Chain Maintained</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Custom Freezing Services</h3>
+                        <p>Need to freeze your own products? We offer custom freezing services for restaurants, food businesses, and individuals.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Bulk Orders</h3>
+                        <p>Special pricing available for bulk orders. Perfect for restaurants, catering services, and large families.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Private Label</h3>
+                        <p>Looking to create your own frozen product line? We offer private labeling services for businesses.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <div class="contact-item">
+                            <strong>Email:</strong>
+                            <a href="mailto:info@marahib.com">info@marahib.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Phone:</strong>
+                            <a href="tel:+1234567890">+1 (234) 567-890</a>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Address:</strong>
+                            <p>123 Freezing Street, Cold Storage City, CS 12345</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Hours:</strong>
+                            <p>Monday - Friday: 8AM - 6PM<br>Saturday: 9AM - 4PM<br>Sunday: Closed</p>
+                        </div>
+                    </div>
+                    <div class="contact-form-container">
+                        <h3>Send us a Message</h3>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Marahib</h3>
+                <p>Premium frozen products preserved with care. Quality you can trust, freshness you can taste.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#home">Home</a></p>
+                <p><a href="#products">Products</a></p>
+                <p><a href="#about">About</a></p>
+                <p><a href="#services">Services</a></p>
+                <p><a href="#contact">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Product Categories</h3>
+                <p><a href="#products" data-category="meals">Frozen Meals</a></p>
+                <p><a href="#products" data-category="chicken">Chicken</a></p>
+                <p><a href="#products" data-category="fish">Fish</a></p>
+                <p><a href="#products" data-category="vegetables">Vegetables</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@marahib.com</p>
+                <p>Phone: +1 (234) 567-890</p>
+                <p>123 Freezing Street<br>Cold Storage City, CS 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Marahib. All rights reserved. | Premium Frozen Products</p>
+        </div>
+    </footer>
+
+    <script src="js/marahib.js"></script>
+</body>
+</html>
+
